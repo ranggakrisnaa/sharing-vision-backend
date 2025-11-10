@@ -99,6 +99,5 @@ docker compose run --rm migrate /app/migrate -dir /app/migrations -action down
 - `POST /article` — membuat artikel.
 - `GET /article` - daftar artikel dengan pagination.
 - `GET /article/:id` — detail artikel.
-- `PUT /article/:id` — update penuh artikel.
-- `PATCH /article/:id` — update sebagian.
+- `PUT /article/:id` — update artikel.
 - `DELETE /article/:id` — hapus artikel.
