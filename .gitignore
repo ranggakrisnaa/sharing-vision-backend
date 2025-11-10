@@ -1,0 +1,17 @@
+# Ignore files
+.DS_Store
+node_modules
+.env
+.env.local
+.env.*.local
+dist
+build
+*.log
+*.pid
+*.seed
+*.pid.lock
+coverage
+.nyc_output
+.cache
+.vercel
+
