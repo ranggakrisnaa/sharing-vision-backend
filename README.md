@@ -1,6 +1,6 @@
-# github.com/ranggakrisnaa/sharing-vision-backend (Fiber + MySQL raw)
+# Post Articles API (Fiber + MySQL raw)
 
-Proyek github.com/ranggakrisnaa/sharing-vision-backendd dengan Go Fiber, menggunakan MySQL via `database/sql` (tanpa ORM).
+Project API untuk membangun REST API Post Articles Simple dengan Go Fiber, menggunakan MySQL via `database/sql` (tanpa ORM).
 
 ## Struktur Folder
 
