@@ -1,4 +1,4 @@
-# Post Articles API (Fiber + MySQL raw)
+# Post Articles API (Fiber + MySQL)
 
 Project API untuk membangun REST API Post Articles Simple dengan Go Fiber, menggunakan MySQL via `database/sql` (tanpa ORM).
 
