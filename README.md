@@ -13,7 +13,7 @@ Proyek github.com/ranggakrisnaa/sharing-vision-backendd dengan Go Fiber, menggun
 - `migrations/` — File migrasi SQL.
 - `.env.example` — Contoh konfigurasi env.
 
-## Menjalankan
+## Menjalankan Aplikasi
 
 1. Salin env (opsional untuk jalankan lokal):
    ```bash
