@@ -20,8 +20,10 @@ func (s *Service) Create(ctx context.Context, req CreateArticleRequest) (Article
 }
 
 func (s *Service) List(ctx context.Context, limit, page int, filter ListFilter) ([]Article, response.Meta, error) {
-	// set default limit and page
-	newLimit := max(limit, 10)
+	newLimit := limit
+	if newLimit <= 0 {
+		newLimit = 10
+	}
 	newPage := max(page, 1)
 
 	// calculate offset
