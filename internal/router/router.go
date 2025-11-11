@@ -26,4 +26,8 @@ func Register(app *fiber.App) {
 		return err
 	})
 
+	// check health
+	app.Get("/health", func(c *fiber.Ctx) error {
+		return c.SendString("OK")
+	})
 }
