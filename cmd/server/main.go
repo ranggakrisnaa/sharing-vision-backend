@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gofiber/fiber/v2"
 
+	"github.com/ranggakrisnaa/sharing-vision-backend/internal/article"
 	"github.com/ranggakrisnaa/sharing-vision-backend/internal/router"
 	"github.com/ranggakrisnaa/sharing-vision-backend/pkg/config"
 	"github.com/ranggakrisnaa/sharing-vision-backend/pkg/database"
@@ -14,8 +15,6 @@ func main() {
 	cfg := config.Load()
 	logger.Init()
 
-	_ = validatorpkg.NewValidator()
-
 	db, err := database.NewMySQL(cfg.DatabaseURL)
 	if err != nil {
 		logger.Log.WithError(err).Fatal("failed connect DB")
@@ -25,7 +24,10 @@ func main() {
 	app := fiber.New()
 
 	// Register routes
-	router.Register(app)
+	articleRepository := article.NewMySQLRepository(db)
+	articleService := article.NewService(articleRepository)
+	articleHandler := article.NewHandler(articleService, validatorpkg.NewValidator())
+	router.Register(app, articleHandler)
 
 	port := cfg.Port
 	logger.Log.WithField("port", port).Info("server listening")

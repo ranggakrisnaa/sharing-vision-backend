@@ -68,6 +68,12 @@ func main() {
 		} else {
 			logger.Log.Info("migrate down: success")
 		}
+	case "force":
+		if err := m.Force(1); err != nil {
+			logger.Log.WithError(err).Fatal("migrate force failed")
+		} else {
+			logger.Log.Info("migrate force: success")
+		}
 	default:
 		logger.Log.WithField("action", *action).Fatal("unknown action")
 	}
