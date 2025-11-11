@@ -1,6 +1,11 @@
 package response
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"fmt"
+
+	"github.com/gofiber/fiber/v2"
+	validatorpkg "github.com/ranggakrisnaa/sharing-vision-backend/pkg/validator"
+)
 
 type Meta struct {
 	Limit   int   `json:"limit"`
@@ -17,22 +22,32 @@ type Response struct {
 	Errors  []interface{} `json:"errors,omitempty"`
 }
 
-func Success(ctx *fiber.Ctx, status int, data interface{}) error {
-	return ctx.Status(status).JSON(Response{Success: true, Data: data})
+func Success(ctx *fiber.Ctx, status int, data interface{}, message string) error {
+	return ctx.Status(status).JSON(Response{Success: true, Data: data, Message: message})
 }
 
 func Fail(ctx *fiber.Ctx, status int, msg interface{}) error {
 	var errors []interface{}
 	var errorMsg string
-	if msgArr, ok := msg.([]interface{}); ok {
-		errors = msgArr
-	} else {
-		if errors = []interface{}{msg}; len(errors) == 0 {
-			errorMsg = msg.(string)
+
+	switch v := msg.(type) {
+	case []interface{}:
+		errors = v
+	case []validatorpkg.FieldError:
+		for _, fe := range v {
+			errors = append(errors, fe)
 		}
+	case string:
+		errorMsg = v
+	default:
+		errorMsg = fmt.Sprintf("%v", v)
 	}
 
-	return ctx.Status(status).JSON(Response{Success: false, Error: errorMsg, Errors: errors})
+	return ctx.Status(status).JSON(Response{
+		Success: false,
+		Error:   errorMsg,
+		Errors:  errors,
+	})
 }
 
 func PageMeta(limit, offset int, total int64) *Meta {

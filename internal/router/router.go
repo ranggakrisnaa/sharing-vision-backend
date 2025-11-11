@@ -3,13 +3,14 @@ package router
 import (
 	"time"
 
+	"github.com/ranggakrisnaa/sharing-vision-backend/internal/article"
 	"github.com/ranggakrisnaa/sharing-vision-backend/pkg/logger"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 )
 
-func Register(app *fiber.App) {
+func Register(app *fiber.App, articleHandler *article.Handler) {
 	// Global middlewares
 	app.Use(recover.New())
 	app.Use(func(c *fiber.Ctx) error {
@@ -30,4 +31,8 @@ func Register(app *fiber.App) {
 	app.Get("/health", func(c *fiber.Ctx) error {
 		return c.SendString("OK")
 	})
+
+	// Register article routes
+	articleGroup := app.Group("/articles")
+	articleHandler.Register(articleGroup)
 }

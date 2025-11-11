@@ -6,5 +6,9 @@ CREATE TABLE IF NOT EXISTS articles (
     status ENUM('publish','draft','thrash') NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    INDEX idx_articles_category_status (category, status),
+    INDEX idx_articles_status (status),
+    FULLTEXT INDEX ft_articles_title (title)
 );
+
