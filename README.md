@@ -94,6 +94,12 @@ go run cmd/migrate/main.go -dir migrations -action down
 docker compose run --rm migrate /app/migrate -dir /app/migrations -action down
 ```
 
+## Dokumentasi API (Postman)
+
+Lihat dokumentasi API (koleksi Postman, contoh request/response) di:
+
+https://documenter.getpostman.com/view/29492816/2sB3WtsdxF
+
 ## Endpoint
 
 - `POST /article` — membuat artikel.
